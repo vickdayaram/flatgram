@@ -1,0 +1,15 @@
+
+<h1>Welcome to your page</h1>
+
+<%= "#{@user.username}" %>
+<br>
+<br>
+<%= link_to 'Log Out', logout_path, method: :post%>
+<br>
+<br>
+<%= link_to 'All Pictures', pictures_path  %>
+<br>
+<br>
+<%= link_to 'Add a comment', new_comment_path %>
+<br>
+<br>

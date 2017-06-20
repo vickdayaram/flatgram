@@ -46,4 +46,4 @@ PictureTag.create(picture_id: pic1.id,
 tag_id: Tag.first.id)
 
 PictureTag.create(picture_id: pic2.id,
-tag_id: Tag.last.id)
+tag_id: Tag.first.id)

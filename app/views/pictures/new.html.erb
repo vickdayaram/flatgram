@@ -1,0 +1,10 @@
+<h1>Add a picture</h1>
+
+<%= form_tag (pictures_path) do %>
+<%= text_field_tag :image_url %>
+<%= text_field_tag :title %>
+<%= text_field_tag : %>
+<%= Tag.all.each do |tag| %>
+<%= checkbox_tax tag %>
+<%= submit_tag "Post Picture" %>
+<% end %>
