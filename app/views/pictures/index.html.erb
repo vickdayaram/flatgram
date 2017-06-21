@@ -13,9 +13,17 @@
   <br>
   <li><%= "Picture by ~ #{current_user.username}" %></li>
   <li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
+
   <% picture.comments.each do |comment| %>
         <%= comment.comment + "- #{comment.user.username}"%>
         <br>
         <% end %>
+
+  <h4>Click on the tags below to find other tags!</h4>
+  <% picture.tags.each do |tag| %>
+        <%= link_to "#{tag.name}", tag_path(tag) %>
+        <br>
+        <% end %>
+
   <% end %>
 </ul>

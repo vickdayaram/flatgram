@@ -28,6 +28,11 @@
 <%= comment.comment + " by " + comment.user.username%>
 <br>
   <% end %>
+  <h4>Click on the tags below to see all pictures</h4>
+  <% picture.tags.each do |tag| %>
+  <%= link_to "#{tag.name}", tag_path(tag) %>
+  <br>
+  <% end %>
 <li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
 <li> <%= link_to "delete picture", picture_path(picture), method: :delete %></li>
 <li> <%= link_to "edit picture", edit_picture_path(picture) %> </li>
