@@ -8,12 +8,21 @@ Rails.application.routes.draw do
   resources :picture_tags
   resources :tags
   # resources :pictures
-  resources :users
+  # resources :users Commenting out since we added the routes again at the bottom
   resources :sessions, only: [:new, :index, :create]
 
   resources :pictures do
   resources :comments, shallow: true
-end
+  end
+
+  #routes for following feature
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+
+  resources :relationships, only: [:create, :destroy]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

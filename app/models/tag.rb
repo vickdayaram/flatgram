@@ -17,7 +17,12 @@ class Tag < ApplicationRecord
         tags.push(tag.name)
       end
     end
-    tags.group_by(&:itself).values.max_by(&:size).first
+    tag = tags.group_by(&:itself).values.max_by(&:size)
+    if tag == nil
+      "No Trending Tags Yet"
+    else
+    Tag.find_by(name: tag)
+    end
   end
 
 

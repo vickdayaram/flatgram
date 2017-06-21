@@ -20,16 +20,20 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<%=  %>"/>Flatgram</a>
-              <a class="navbar-brand" href="<%= %>"/>My Pictures<%= %>!</a>
-              <a class="navbar-brand" href="<%= %>"/>All Pictures</a>
-              <a class="navbar-brand" href="<%= %>"/>Hello</a>
-              <a class="navbar-brand" href="<%= %>" data-method="post"/></a>
-              <a class="navbar-brand" href="<%= %>"/></a>
-              <a class="navbar-brand" href="<%= %>" /></a>
+              <a class="navbar-brand" href="<%=  %>"/>Flatgram</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+              <% if logged_in? %>
+              <li class="navbar-brand"> <%= "Welcome Back #{current_user.username}!" %></li>
+              <li> <%= link_to "My Profile", user_path(current_user.id) %> </li>
+              <li> <%= link_to 'Add a picture', new_picture_path %> </li>
+              <li> <%= link_to "Flatgram Feed", pictures_path %> </li>
+              <li> <%= link_to "Logout", logout_path, method: :post %></li>
+              <% else %>
+              <li> <%= link_to "Login", signin_path %> </li>
+              <li> <%= link_to "Sign Up", signup_path %> </li>
+              <% end %>
              <!--  nav here -->
             </ul>
           </div><!--/.nav-collapse -->

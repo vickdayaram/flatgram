@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :current_user?, :relationship_exists?
 
   def current_user
     @user ||= User.find(session[:user_id]) if session[:user_id]
@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !!current_user
+  end
+
+  def current_user?(user)
+    user == current_user
   end
 
   def authenticated
@@ -24,5 +28,8 @@ class ApplicationController < ActionController::Base
     params.require(:picture).permit(:image_url, :title, :user_id, :tags_attributes, :tag_id, :image)
   end
 
+  def relationship_exists?(current_user, user)
+    !!Relationship.find_by(follower_id: current_user.id, followed_id: user.id)
+  end
 
 end

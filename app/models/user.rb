@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy #if user account is deleted, all their
   has_many :pictures, dependent: :destroy # pictures and comments will be as well.
 
-  has_many :active_relationships, class_name:"Relationship", foreign_key:"follwer_id", dependent: :destroy
+  has_many :active_relationships, class_name:"Relationship", foreign_key:"follower_id", dependent: :destroy
   has_many :passive_relationships, class_name:"Relationship", foreign_key:"followed_id", dependent: :destroy
 
   has_many :following, through: :active_relationships, source: :followed
@@ -20,12 +20,12 @@ class User < ApplicationRecord
 
   #follow another user
   def follow(other)
-    active_relationships.create(followed_id: other.id)
+    active_relationships.create(follower_id: self.id, followed_id: other.id)
   end
 
   #unfollow a user
   def unfollow(other)
-    active_relationships.find_by(followed_id: other.id).destroy
+    active_relationships.find_by(follower_id: self.id, followed_id: other.id).destroy
   end
 
   #is following?

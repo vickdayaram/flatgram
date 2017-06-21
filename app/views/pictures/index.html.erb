@@ -1,8 +1,4 @@
-
-<h1> <%= link_to "My Pictures", user_path(current_user.id) %> </h1>
-
-
-<h1>Pictures</h1>
+<h1>Flatgram Feed</h1>
 <ul>
   <% @pictures.each do |picture| %>
   <h3> <%= picture.title %> </h3>
@@ -11,7 +7,8 @@
   <%= image_tag picture.image.url(:medium) %>
   <br>
   <br>
-  <li><%= "Picture by ~ #{current_user.username}" %></li>
+  <li><%= "Picture by ~ #{picture.user.username}" %></li>
+  <li><%= "Posted at ~ #{picture.created_at.strftime("%d %b. %Y %H:%M")}"%></li>
   <li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
 
   <% picture.comments.each do |comment| %>
@@ -25,5 +22,20 @@
         <br>
         <% end %>
 
+        <% if current_user?picture.user%>
+        <%= "flatgram" %>
+        <% elsif !relationship_exists?(current_user, picture.user) %>
+            <%= form_for current_user, :url => relationships_path, method: :post do |f| %>
+            <%= f.hidden_field :followed_id, value: picture.user.id %>
+            <%= f.submit "Follow" %>
+            <% end %>
+        <% elsif current_user.id == picture.user.id %>
+          <%= "flatgram" %>
+        <%else %>
+            <%= form_for current_user, :url => relationship_path(current_user), method: :delete do |f| %>
+            <%= f.hidden_field :followed_id, value: picture.user.id %>
+            <%= f.submit "Unfollow" %>
+            <% end %>
+        <% end %>
   <% end %>
 </ul>
