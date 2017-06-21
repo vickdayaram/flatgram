@@ -1,7 +1,18 @@
-<h1>Pictures</h1>
 
+<h1> <%= link_to "My Pictures", user_path(current_user.id) %> </h1>
+
+
+<h1>Pictures</h1>
 <ul>
   <% @pictures.each do |picture| %>
   <li> <%= picture.image_url %> </li>
+  <br>
+  <br>
+  <li> <%= link_to "edit picture", edit_picture_path(picture) %> </li>
+  <br>
+  <br>
+  <li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
+  <br>
+  <br>
   <% end %>
 </ul>

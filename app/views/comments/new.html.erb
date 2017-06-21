@@ -2,7 +2,11 @@
 
 <h1>Add a new comment</h1>
 
-<%= form_for @comment do |f| %>
-<%= f.text_field :comment %>
-<%= f.submit  %>
-<% end  %>
+<h2> <%= @picture.image_url %> </h2>
+<h2> <%= @picture.title %> </h2>
+
+<%= form_tag picture_comments_path(@picture) do %>
+<%= label_tag :comment %>
+<%= text_field_tag :comment %>
+<%= submit_tag "Add comment" %></a>
+<% end %>

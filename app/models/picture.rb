@@ -5,4 +5,6 @@ class Picture < ApplicationRecord
   has_many :picture_tags
   has_many :tags, through: :picture_tags
   accepts_nested_attributes_for :tags
+  validates :image_url, presence: true
+  validates :title, presence: true
 end

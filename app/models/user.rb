@@ -5,12 +5,21 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :comments
-  has_many :pictures, through: :comments
+  has_many :pictures
+
 
 
   #may be working be re test as you add more data.
   def received_comments
-    all_comments = self.comments.map {|comment| comment.picture.comment}
-  end 
+    my_comments = []
+    self.pictures.each do |picture|
+      picture.comments.each do |comment|
+        if comment.user_id != self.id
+        my_comments.push(comment)
+        end
+      end
+    end
+    my_comments
+  end
 
 end

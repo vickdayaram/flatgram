@@ -1,7 +1,7 @@
 
 <h1>Welcome to your page</h1>
 
-<%= "#{@user.username}" %>
+<%= "Welcome #{@user.username}!" %>
 <br>
 <br>
 <%= link_to 'Log Out', logout_path, method: :post%>
@@ -10,6 +10,35 @@
 <%= link_to 'All Pictures', pictures_path  %>
 <br>
 <br>
-<%= link_to 'Add a comment', new_comment_path %>
+<%= link_to 'Add a picture', new_picture_path %>
 <br>
 <br>
+
+<h2>My Pictures</h2>
+<% @user.pictures.each do |picture| %>
+<h4>Picture</h4>
+<%= picture.image_url %>
+<br>
+<h4>Title</h4>
+<%= picture.title %>
+<h4>Comments</h4>
+<%  picture.comments.each do |comment| %>
+<%= comment.comment + " by " + comment.user.username%>
+<br>
+  <% end %>
+<li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
+<li> <%= link_to "delete picture", picture_path(picture), method: :delete %></li>
+<% end  %>
+<br>
+<br>
+
+<h2>Most Popular Tags:</h2>
+<% Tag.most_popular.each do |tag| %>
+<br>
+<%= tag.name %>
+<% end %>
+<br>
+<br>
+<h2>Trending Tags: </h2>
+<br>
+<%= Tag.trending %>

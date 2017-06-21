@@ -1,0 +1,28 @@
+
+<h1>Your pictures</h1>
+
+<label>Your Image:</label>
+<%= @picture.image_url %>
+<br>
+<br>
+<label>Your Image Title:</label>
+<%= @picture.title %>
+<br>
+<br>
+<label>Your Image Tags: </label>
+<% @picture.tags.each do |tag| %>
+<%= tag.name %>
+<% end %>
+
+<br>
+<br>
+<label>Picture Comments: </label>
+<% @picture.comments.each do |comment| %>
+<br>
+<%= comment.comment + " by " + comment.user.username%>
+<% end %>
+<br>
+<br>
+
+<%= link_to "All pictures", pictures_path %>
+<%= link_to "My Pictures", user_path(current_user.id) %>
