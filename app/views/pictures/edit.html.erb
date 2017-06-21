@@ -10,6 +10,10 @@
 <%= f.text_field :title %>
 <br>
 <br>
+<%= f.label :image %>
+<%= f.file_field :image %>
+<br>
+<br>
 <%= f.fields_for :tags do |tag| %>
   <label>Update Created Tags</label>
   <br>

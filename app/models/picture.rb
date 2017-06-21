@@ -5,6 +5,9 @@ class Picture < ApplicationRecord
   has_many :picture_tags
   has_many :tags, through: :picture_tags
   accepts_nested_attributes_for :tags
-  validates :image_url, presence: true
   validates :title, presence: true
+  validates :image, presence: true
+
+  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 end

@@ -1,9 +1,8 @@
-
-<h1>Your pictures</h1>
-
 <label>Your Image:</label>
 <%= @picture.image_url %>
 <br>
+<br>
+<%= image_tag @picture.image.url(:medium) %>
 <br>
 <label>Your Image Title:</label>
 <%= @picture.title %>

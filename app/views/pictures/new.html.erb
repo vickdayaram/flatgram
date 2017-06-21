@@ -1,6 +1,6 @@
 <h1>Add a picture</h1>
 
-<%= form_for @picture do |f| %>
+<%= form_for @picture, html: { multipart: true } do |f| %>
 <%= f.label :image_url %>
 <%= f.text_field :image_url %>
 <br>
@@ -9,14 +9,21 @@
 <%= f.text_field :title %>
 <br>
 <br>
+<h4>Upload an Image</h4>
+<%= f.label :image %>
+<%= f.file_field :image %>
+<br>
+<br>
 <%= f.fields_for :tags do |tag| %>
   <label>Create a Tag, or select one from the boxes below!</label>
     <%= tag.label :name %>
     <%= tag.text_field :name %>
 <% end %>
 <% Tag.all.each do |tag| %>
+<br>
 <%= check_box_tag "picture[tag_id][]", tag.id %>
 <%= tag.name %>
 <% end  %>
+<br>
 <%= f.submit %>
 <% end %>

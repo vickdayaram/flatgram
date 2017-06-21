@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def picture_params
-    params.require(:picture).permit(:image_url, :title, :user_id, :tags_attributes, :tag_id)
+    params.require(:picture).permit(:image_url, :title, :user_id, :tags_attributes, :tag_id, :image)
   end
 
 

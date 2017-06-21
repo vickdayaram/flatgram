@@ -5,14 +5,17 @@
 <h1>Pictures</h1>
 <ul>
   <% @pictures.each do |picture| %>
-  <li> <%= picture.image_url %> </li>
+  <h3> <%= picture.title %> </h3>
   <br>
   <br>
-  <li> <%= link_to "edit picture", edit_picture_path(picture) %> </li>
+  <%= image_tag picture.image.url(:medium) %>
   <br>
   <br>
+  <li><%= "Picture by ~ #{current_user.username}" %></li>
   <li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
-  <br>
-  <br>
+  <% picture.comments.each do |comment| %>
+        <%= comment.comment + "- #{comment.user.username}"%>
+        <br>
+        <% end %>
   <% end %>
 </ul>

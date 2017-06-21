@@ -19,6 +19,8 @@
 <h4>Picture</h4>
 <%= picture.image_url %>
 <br>
+<%= image_tag picture.image.url(:medium) %>
+<br>
 <h4>Title</h4>
 <%= picture.title %>
 <h4>Comments</h4>
@@ -28,6 +30,7 @@
   <% end %>
 <li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
 <li> <%= link_to "delete picture", picture_path(picture), method: :delete %></li>
+<li> <%= link_to "edit picture", edit_picture_path(picture) %> </li>
 <% end  %>
 <br>
 <br>

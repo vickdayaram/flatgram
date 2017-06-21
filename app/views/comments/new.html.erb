@@ -2,8 +2,8 @@
 
 <h1>Add a new comment</h1>
 
-<h2> <%= @picture.image_url %> </h2>
 <h2> <%= @picture.title %> </h2>
+<%= image_tag @picture.image.url(:medium) %>
 
 <%= form_tag picture_comments_path(@picture) do %>
 <%= label_tag :comment %>
