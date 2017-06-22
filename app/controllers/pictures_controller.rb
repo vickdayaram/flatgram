@@ -24,7 +24,7 @@ class PicturesController < ApplicationController
         tags.each do |tag|
         @picture.tags << tag
         end
-    end 
+    end
     if @picture.save
          redirect_to picture_path(@picture)
     else

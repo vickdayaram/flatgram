@@ -1,49 +1,52 @@
 
 
-
+<div class="container">
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<h1 align="center"><%= @user.username %></h1>
 <br>
-<br>
-
 <%= image_tag @user.avatar.url(:medium) %>
 <br>
 <br>
-<h4>Followers: <%= current_user.followers.count %></h4>
-<h4>Following: <%= current_user.following.count %></h4>
-<br>
-<br>
+<div>Followers: <%= current_user.followers.count %></div>
+<div>Following: <%= current_user.following.count %></div>
+</div>
+  <div class="col-md-4">
+    <% if Tag.all != nil %>
+    <h3>Popular Tags:</h3>
+        <% Tag.most_popular.each do |tag| %>
+        <%= link_to tag.name, tag_path(tag) %>
+        <% end %>
+    <% end %>
+    <h3>Trending Tags:</h3>
+        <%= link_to Tag.trending.name, tag_path(Tag.trending) %>
+  </div>
+</div>
 
-<h2>My Pictures</h2>
+<h2>Pictures</h2>
+<div class="container">
 <% @user.pictures.each do |picture| %>
-<%= picture.title %>
-<br>
-<%= image_tag picture.image.url(:medium) %>
-<br>
-<h4>Comments</h4>
-<%  picture.comments.each do |comment| %>
-<%= comment.comment + " by " + comment.user.username%>
-<br>
-  <% end %>
-  <h4>Click on the tags below to see all pictures</h4>
-  <% picture.tags.each do |tag| %>
-  <%= link_to "#{tag.name}", tag_path(tag) %>
-  <br>
-  <% end %>
-<li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
-<li> <%= link_to "delete picture", picture_path(picture), method: :delete %></li>
-<li> <%= link_to "edit picture", edit_picture_path(picture) %> </li>
+  <div class=<%="col-md-4"-%>>
+      <h4 align="center"><%= picture.title %><h4>
+      <br>
+      <%= image_tag picture.image.url(:medium) %>
+      <br>
+      <h4>Comments</h4>
+      <%  picture.comments.each do |comment| %>
+      <%= comment.comment + " => " + comment.user.username%>
+      <br>
+        <% end %>
+        <li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
+        <h4>Tags</h4>
+        <% picture.tags.each do |tag| %>
+        <%= link_to "#{tag.name}", tag_path(tag) %>
+        <br>
+        <% end %>
+      <li> <%= link_to "delete picture", picture_path(picture), method: :delete %></li>
+      <li> <%= link_to "edit picture", edit_picture_path(picture) %> </li>
+  </div>
 <% end  %>
+</div>
 <br>
 <br>
-
-<% if Tag.all != nil %>
-<h2>Most Popular Tags:</h2>
-
-<% Tag.most_popular.each do |tag| %>
-<br>
-<%= link_to tag.name, tag_path(tag) %>
-<% end %>
-<% end %>
-<br>
-<br>
-<h1>All Tags</h1>
-<%= link_to Tag.trending.name, tag_path(Tag.trending) %>

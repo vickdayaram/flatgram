@@ -14,8 +14,10 @@
  *= require_self
  */
  @import "bootstrap";
+ @import url('https://fonts.googleapis.com/css?family=Lobster+Two');
 /* Some Style from the Bootstrap Default Theme */
 body {
   padding-top: 70px;
   padding-bottom: 30px;
+  font-family: 'Lobster Two', cursive;
 }

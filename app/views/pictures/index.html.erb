@@ -1,7 +1,9 @@
-<h1>Flatgram Feed</h1>
-<ul>
+<h1 align="center">Flatgram Feed</h1>
+
+<div class="container">
   <% @pictures.each do |picture| %>
-  <h3> <%= picture.title %> </h3>
+  <div class=<%="col-md-4"-%>>
+  <h3 align="center"> <%= picture.title %> </h3>
   <br>
   <br>
   <%= image_tag picture.image.url(:medium) %>
@@ -37,5 +39,6 @@
   <% picture.tags.each do |tag| %>
         <%= link_to "#{tag.name}", tag_path(tag) %>
         <% end %>
+      </div>
   <% end %>
-</ul>
+</div>
