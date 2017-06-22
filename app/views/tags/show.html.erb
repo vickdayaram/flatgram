@@ -1,5 +1,4 @@
-<h1>All pictures for <%= @tag.name %> </h1>
-<%= link_to "My Pictures", user_path(current_user.id) %>
+<h1><%= @tag.name %> pictures </h1>
 <br>
 <br>
 <% @tag.pictures.each do |picture| %>

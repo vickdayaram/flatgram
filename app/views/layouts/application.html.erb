@@ -27,6 +27,7 @@
               <% if logged_in? %>
               <li class="navbar-brand"> <%= "Welcome Back #{current_user.username}!" %></li>
               <li> <%= link_to "My Profile", user_path(current_user.id) %> </li>
+              <li> <%= link_to "Update your profile", edit_user_path(current_user)%> </li>
               <li> <%= link_to 'Add a picture', new_picture_path %> </li>
               <li> <%= link_to "Flatgram Feed", pictures_path %> </li>
               <li> <%= link_to "Logout", logout_path, method: :post %></li>

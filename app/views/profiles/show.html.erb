@@ -1,0 +1,43 @@
+
+<h2> <%= "#{@user.username}'s Pictures" %> </h2>
+
+<% if current_user?@user%>
+<%= "flatgram" %>
+<% elsif !relationship_exists?(current_user, @user) %>
+    <%= form_for current_user, :url => relationships_path, method: :post do |f| %>
+    <%= f.hidden_field :followed_id, value: @user.id %>
+    <%= f.submit "Follow" %>
+    <% end %>
+<% elsif current_user.id == @user.id %>
+  <%= "flatgram" %>
+<%else %>
+    <%= form_for current_user, :url => relationship_path(current_user), method: :delete do |f| %>
+    <%= f.hidden_field :followed_id, value: @user.id %>
+    <%= f.submit "Unfollow" %>
+    <% end %>
+<% end %>
+
+
+
+<% @user.pictures.each do |picture| %>
+<h4>Picture</h4>
+<%= picture.image_url %>
+<br>
+<%= image_tag picture.image.url(:medium) %>
+<br>
+<h4>Title</h4>
+<%= picture.title %>
+<h4>Comments</h4>
+<%  picture.comments.each do |comment| %>
+<%= comment.comment + " by " + comment.user.username%>
+<br>
+  <% end %>
+  <h4>Click on the tags below to see all pictures</h4>
+  <% picture.tags.each do |tag| %>
+  <%= link_to "#{tag.name}", tag_path(tag) %>
+  <br>
+  <% end %>
+<li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
+<% end  %>
+<br>
+<br>

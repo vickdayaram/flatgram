@@ -3,31 +3,21 @@
 
 <br>
 <br>
-<h4>Follower count</h4>
-<%= current_user.followers.count %>
-<br>
-<h4>Following count</h4>
-<%= current_user.following.count %>
-<br>
-<%= link_to 'Log Out', logout_path, method: :post%>
+
+<%= image_tag @user.avatar.url(:medium) %>
 <br>
 <br>
-<%= link_to 'All Pictures', pictures_path  %>
-<br>
-<br>
-<%= link_to 'Add a picture', new_picture_path %>
+<h4>Followers: <%= current_user.followers.count %></h4>
+<h4>Following: <%= current_user.following.count %></h4>
 <br>
 <br>
 
 <h2>My Pictures</h2>
 <% @user.pictures.each do |picture| %>
-<h4>Picture</h4>
-<%= picture.image_url %>
+<%= picture.title %>
 <br>
 <%= image_tag picture.image.url(:medium) %>
 <br>
-<h4>Title</h4>
-<%= picture.title %>
 <h4>Comments</h4>
 <%  picture.comments.each do |comment| %>
 <%= comment.comment + " by " + comment.user.username%>
