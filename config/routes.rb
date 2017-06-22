@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   resources :relationships, only: [:create, :destroy]
   get ':username', to: 'profiles#show', as: :profile
+
+  resources :searchs, only: [:index]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

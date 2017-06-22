@@ -4,10 +4,7 @@
   <% @pictures.each do |picture| %>
   <div class=<%="col-md-4"-%>>
   <h3 align="center"> <%= picture.title %> </h3>
-  <br>
-  <br>
   <%= image_tag picture.image.url(:medium) %>
-  <br>
   <br>
   <% if current_user?picture.user%>
   <%= "Thanks for posting to Flatgram!" %>
@@ -16,8 +13,6 @@
       <%= f.hidden_field :followed_id, value: picture.user.id %>
       <%= f.submit "Follow" %>
       <% end %>
-  <% elsif current_user.id == picture.user.id %>
-    <%= "flatgram" %>
   <%else %>
       <%= form_for current_user, :url => relationship_path(current_user), method: :delete do |f| %>
       <%= f.hidden_field :followed_id, value: picture.user.id %>
@@ -25,16 +20,15 @@
       <% end %>
   <% end %>
   <br>
-  <li><%= "Picture by: "%></li>
-  <li><%= link_to "#{picture.user.username}", profile_path(picture.user.username) %></li>
-  <li><%= "Posted at ~ #{picture.created_at.strftime("%d %b. %Y %H:%M")}"%></li>
-  <li> <%= link_to "Add Comment", new_picture_comment_path(picture) %></li>
-
+  <p><%= "By: "%></p>
+  <p><%= link_to "#{picture.user.username}", profile_path(picture.user.username) %></p>
+  <p><%= "Posted at ~ #{picture.created_at.strftime("%d %b. %Y %H:%M")}"%></p>
+  <p>Comments</p>
   <% picture.comments.each do |comment| %>
         <%= comment.comment + "- #{comment.user.username}"%>
         <br>
         <% end %>
-
+  <li> <%= link_to "Add Comment", new_picture_comment_path(picture) %></li>
   <h4>Tags</h4>
   <% picture.tags.each do |tag| %>
         <%= link_to "#{tag.name}", tag_path(tag) %>
@@ -42,3 +36,5 @@
       </div>
   <% end %>
 </div>
+<br>
+<br>

@@ -1,12 +1,14 @@
 
 
 <div class="container">
-<div class="col-md-4">
-</div>
+  <div class="col-md-4">
+    <h3 align="center">Trending Tags:</h3>
+        <%= link_to Tag.trending.name, tag_path(Tag.trending) %>
+  </div>
 <div class="col-md-4">
 <h1 align="center"><%= @user.username %></h1>
 <br>
-<%= image_tag @user.avatar.url(:medium) %>
+<%= image_tag @user.avatar.url(:medium), class:"img-circle" %>
 <br>
 <br>
 <div>Followers: <%= current_user.followers.count %></div>
@@ -14,13 +16,11 @@
 </div>
   <div class="col-md-4">
     <% if Tag.all != nil %>
-    <h3>Popular Tags:</h3>
+    <h3 align="center">Popular Tags:</h3>
         <% Tag.most_popular.each do |tag| %>
         <%= link_to tag.name, tag_path(tag) %>
         <% end %>
     <% end %>
-    <h3>Trending Tags:</h3>
-        <%= link_to Tag.trending.name, tag_path(Tag.trending) %>
   </div>
 </div>
 

@@ -1,6 +1,10 @@
-
-<h2> <%= "#{@user.username}'s Pictures" %> </h2>
-
+<div class="container">
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<h2 align="center"> <%= "#{@user.username}'s Pictures" %> </h2>
+<%= image_tag @user.avatar.url(:medium), class:"img-circle" %>
+<br>
 <% if current_user?@user%>
 <%= "flatgram" %>
 <% elsif !relationship_exists?(current_user, @user) %>
@@ -16,7 +20,8 @@
     <%= f.submit "Unfollow" %>
     <% end %>
 <% end %>
-
+</div>
+</div>
 
 
 <% @user.pictures.each do |picture| %>
