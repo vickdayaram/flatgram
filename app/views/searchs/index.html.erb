@@ -1,0 +1,9 @@
+
+<h1>Search Results</h1>
+<% if @tags.empty? %>
+<%= "No results found" %>
+<% else %>
+<% @tags.each do |tags| %>
+<li> <%= tags.name %> </li>
+<% end %>
+<% end %>

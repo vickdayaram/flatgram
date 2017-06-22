@@ -27,9 +27,10 @@ Rails.application.routes.draw do
   end
 
   resources :relationships, only: [:create, :destroy]
+  get '/searchs', to: 'searchs#index', as: :searchs
   get ':username', to: 'profiles#show', as: :profile
 
-  resources :searchs, only: [:index]
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

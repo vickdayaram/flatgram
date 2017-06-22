@@ -2,21 +2,21 @@
 <div class="col-md-4">
 </div>
 <div class="col-md-4">
-<h2 align="center"> <%= "#{@user.username}'s Pictures" %> </h2>
-<%= image_tag @user.avatar.url(:medium), class:"img-circle" %>
+<h2 align="center"> <%= "#{@profileuser.username}'s Pictures" %> </h2>
+<%= image_tag @profileuser.avatar.url(:thumb), class:"img-circle" %>
 <br>
-<% if current_user?@user%>
+<% if current_user?@profileuser%>
 <%= "flatgram" %>
-<% elsif !relationship_exists?(current_user, @user) %>
+<% elsif !relationship_exists?(current_user, @profileuser) %>
     <%= form_for current_user, :url => relationships_path, method: :post do |f| %>
-    <%= f.hidden_field :followed_id, value: @user.id %>
+    <%= f.hidden_field :followed_id, value: @profileuser.id %>
     <%= f.submit "Follow" %>
     <% end %>
-<% elsif current_user.id == @user.id %>
+<% elsif current_user.id == @profileuser.id %>
   <%= "flatgram" %>
 <%else %>
     <%= form_for current_user, :url => relationship_path(current_user), method: :delete do |f| %>
-    <%= f.hidden_field :followed_id, value: @user.id %>
+    <%= f.hidden_field :followed_id, value: @profileuser.id %>
     <%= f.submit "Unfollow" %>
     <% end %>
 <% end %>
@@ -24,7 +24,7 @@
 </div>
 
 
-<% @user.pictures.each do |picture| %>
+<% @profileuser.pictures.each do |picture| %>
 <h4>Picture</h4>
 <%= picture.image_url %>
 <br>
