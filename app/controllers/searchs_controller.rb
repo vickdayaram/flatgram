@@ -11,4 +11,5 @@ class SearchsController < ApplicationController
     end
     @tags
   end
+
 end

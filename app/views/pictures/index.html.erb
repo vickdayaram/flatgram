@@ -2,12 +2,12 @@
 
 <div class="container">
   <% @pictures.each do |picture| %>
-  <div class=<%="col-md-4"-%>>
-  <h3 align="center"> <%= picture.title %> </h3>
-  <%= image_tag picture.image.url(:medium) %>
-  <br>
-  <%= button_to "details", picture_path(picture), method: :get, class:"btn btn-primary" %>
-  <br>
+      <div class=<%="col-md-4"-%>>
+          <h3 align="center"> <%= picture.title %> </h3>
+          <%= image_tag picture.image.url(:medium) %>
+          <br>
+          <%= button_to "details", picture_path(picture), method: :get, class:"btn btn-primary" %>
+          <br>
       </div>
   <% end %>
 </div>

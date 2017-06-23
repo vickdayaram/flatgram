@@ -1,24 +1,32 @@
+
 <div class="container">
-<div class="col-md-4">
-</div>
-<div class="col-md-4", align="center">
-<h1><%= @picture.title %></h1>
-<br>
-<%= image_tag @picture.image.url(:medium) %>
-<h3>Image by <%= link_to "#{@picture.user.username}", profile_path(@picture.user.username)%></h3>
-<p><%= "Posted at ~ #{@picture.created_at.strftime("%d %b. %Y %H:%M")}"%></p>
-<h4>Comments: </h4>
-<% @picture.comments.each do |comment| %>
-<%= comment.user.username + ": " + comment.comment %>
-<br>
-<% end %>
-<% if current_user?@picture.user %>
-<%= button_to "delete picture", picture_path(@picture), method: :delete, class: "btn btn-danger" %>
-<%= button_to "edit picture", edit_picture_path(@picture), method: :get, class: "btn btn-info" %>
-<% end %>
-<%= button_to "add comment", new_picture_comment_path(@picture), method: :get, class: "btn btn-info" %>
-<h4>Tags</h4>
-  <% @picture.tags.each do |tag| %>
-  <%= button_to "#{tag.name}", tag_path(tag), method: :get, class: "btn btn-success" %>
-  <% end %>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4", align="center">
+      <h1><%= @picture.title %></h1>
+      <br>
+      <%= image_tag @picture.image.url(:medium) %>
+
+      <h3>Image by <%= link_to "#{@picture.user.username}", profile_path(@picture.user.username)%></h3>
+      <p><%= "Posted at ~ #{@picture.created_at.strftime("%d %b. %Y %H:%M")}"%></p>
+
+      <h4>Comments: </h4>
+      <% @picture.comments.each do |comment| %>
+      <%= comment.user.username + ": " + comment.comment %>
+      <br>
+      <% end %>
+
+      <% if current_user?@picture.user %>
+      <%= button_to "delete picture", picture_path(@picture), method: :delete, class: "btn btn-danger" %>
+      <%= button_to "edit picture", edit_picture_path(@picture), method: :get, class: "btn btn-info" %>
+      <% end %>
+
+      <%= button_to "add comment", new_picture_comment_path(@picture), method: :get, class: "btn btn-info" %>
+
+      <h4>Tags</h4>
+      <% @picture.tags.each do |tag| %>
+      <%= button_to "#{tag.name}", tag_path(tag), method: :get, class: "btn btn-success" %>
+      <% end %>
+
+    </div>
 </div>

@@ -1,6 +1,5 @@
 class TagsController < ApplicationController
 
-
   def index
     @tags = Tag.all
     if params[:search]
@@ -8,7 +7,7 @@ class TagsController < ApplicationController
     else
     @tags = Tag.all.order("created_at DESC")
     end
-  end 
+  end
 
   def show
     @tag = Tag.find(params[:id])
