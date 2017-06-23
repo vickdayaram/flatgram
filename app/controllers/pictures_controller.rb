@@ -47,7 +47,7 @@ class PicturesController < ApplicationController
     if @picture.update(picture_params)
       redirect_to picture_path(@picture)
     else
-      redirect_to pictures_path
+      redirect_to picture_path(@picture)
     end
   end
 

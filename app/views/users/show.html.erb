@@ -2,51 +2,34 @@
 
 <div class="container">
   <div class="col-md-4">
-    <h3 align="center">Trending Tags:</h3>
-        <%= link_to Tag.trending.name, tag_path(Tag.trending) %>
+    <h1><%= @user.username %></h1>
+    <h3>Followers: <%= current_user.followers.count %> :: Following: <%= current_user.following.count %></h3>
+    <br>
+    <%= image_tag @user.avatar.url(:medium), class:"img-circle" %>
+    <br>
+    <br>
   </div>
-<div class="col-md-4">
-<h1 align="center"><%= @user.username %></h1>
-<br>
-<%= image_tag @user.avatar.url(:medium), class:"img-circle" %>
-<br>
-<br>
-<div>Followers: <%= current_user.followers.count %></div>
-<div>Following: <%= current_user.following.count %></div>
+<div class="col-md-2">
+  <% if Tag.all != nil %>
+  <h3>Popular Tags:</h3>
+      <% Tag.most_popular.each do |tag| %>
+      <div><%= button_to tag.name, tag_path(tag), method: :get, class: "btn btn-success" %></div>
+      <% end %>
+  <% end %>
 </div>
-  <div class="col-md-4">
-    <% if Tag.all != nil %>
-    <h3 align="center">Popular Tags:</h3>
-        <% Tag.most_popular.each do |tag| %>
-        <%= link_to tag.name, tag_path(tag) %>
-        <% end %>
-    <% end %>
+  <div class="col-md-6">
+    <h3>Trending</h3>
+    <div><%= button_to Tag.trending.name, tag_path(Tag.trending), method: :get, class: "btn btn-success" %></div>
   </div>
 </div>
 
-<h2>Pictures</h2>
 <div class="container">
 <% @user.pictures.each do |picture| %>
-  <div class=<%="col-md-4"-%>>
+<div class=<%="col-md-4"-%>>
       <h4 align="center"><%= picture.title %><h4>
       <br>
       <%= image_tag picture.image.url(:medium) %>
-      <br>
-      <h4>Comments</h4>
-      <%  picture.comments.each do |comment| %>
-      <%= comment.comment + " => " + comment.user.username%>
-      <br>
-        <% end %>
-        <li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
-        <h4>Tags</h4>
-        <% picture.tags.each do |tag| %>
-        <%= link_to "#{tag.name}", tag_path(tag) %>
-        <br>
-        <% end %>
-      <li> <%= link_to "delete picture", picture_path(picture), method: :delete %></li>
-      <li> <%= link_to "edit picture", edit_picture_path(picture) %> </li>
-  </div>
+      <%= button_to "Details", picture_path(picture), method: :get, class:"btn btn-primary" %>
+</div>
 <% end  %>
 </div>
-<br>
-<br>

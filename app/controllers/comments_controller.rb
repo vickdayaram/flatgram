@@ -13,10 +13,14 @@ class CommentsController < ApplicationController
     @comment.picture_id = params[:picture_id]
     @picture = Picture.find(params[:picture_id])
     if @comment.save
-      redirect_to pictures_path
+      redirect_to picture_path(@picture)
     else
       render :new
     end
+  end
+
+  def show
+    @comment = Comment.find(params[:id])
   end
 
 end

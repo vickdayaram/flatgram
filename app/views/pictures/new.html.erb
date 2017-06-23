@@ -6,10 +6,6 @@
 <div class="col-md-4">
 <h1>Add a picture</h1>
 <%= form_for @picture, html: { multipart: true } do |f| %>
-<%= f.label :image_url %>
-<%= f.text_field :image_url %>
-<br>
-<br>
 <%= f.label :title %>
 <%= f.text_field :title %>
 <br>
@@ -30,6 +26,6 @@
 <%= tag.name %>
 <% end  %>
 <br>
-<%= f.submit %>
+<%= f.submit class:"btn btn-primary" %>
 <% end %>
 </div>

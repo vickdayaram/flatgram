@@ -21,7 +21,11 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-              <a class="navbar-brand" href="<%=  %>"/>Flatgram</a>
+              <% if logged_in? %>
+              <div class="navbar-brand"> <%= link_to "Flatgram", user_path(current_user.id) %> </div>
+              <% else %>
+              <div class="navbar-brand"> <%= link_to "Flatgram", home_path %> </div>
+              <% end %>
           </div>
 
           <div class="navbar-collapse collapse">
@@ -40,7 +44,7 @@
 
               <ul class="nav navbar-nav font">
                 <%= form_tag(searchs_path, :method => "get", id: "search-form") do %>
-                <%= text_field_tag :search, params[:search], placeholder: "Search Flatgram Tags" %>
+                <%= text_field_tag :search, params[:search], placeholder: "Search Flatgram" %>
                 <%= submit_tag "Search", :name => nil %>
                 <% end %>
               </ul>

@@ -1,7 +1,5 @@
+<div align="center">
 <h1>Welcome back!</h1>
-<h1>Please sign in below</h1>
-
-
 <%= form_tag (sessions_path) do %>
 <%= label_tag :username %>
 <%= text_field_tag :username %>
@@ -11,5 +9,9 @@
 <%= password_field_tag :password %>
 <br>
 <br>
-<%= submit_tag "Sign in!" %></a>
+<%= submit_tag "Sign in!", class: "btn btn-primary"%></a>
 <% end %>
+<% if flash[:notice] %>
+<%= flash[:notice] %>
+<% end %>
+</div>

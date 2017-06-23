@@ -1,48 +1,45 @@
 <div class="container">
 <div class="col-md-4">
-</div>
-<div class="col-md-4">
-<h2 align="center"> <%= "#{@profileuser.username}'s Pictures" %> </h2>
-<%= image_tag @profileuser.avatar.url(:thumb), class:"img-circle" %>
-<br>
-<% if current_user?@profileuser%>
-<%= "flatgram" %>
-<% elsif !relationship_exists?(current_user, @profileuser) %>
-    <%= form_for current_user, :url => relationships_path, method: :post do |f| %>
-    <%= f.hidden_field :followed_id, value: @profileuser.id %>
-    <%= f.submit "Follow" %>
-    <% end %>
-<% elsif current_user.id == @profileuser.id %>
-  <%= "flatgram" %>
-<%else %>
-    <%= form_for current_user, :url => relationship_path(current_user), method: :delete do |f| %>
-    <%= f.hidden_field :followed_id, value: @profileuser.id %>
-    <%= f.submit "Unfollow" %>
-    <% end %>
-<% end %>
-</div>
-</div>
-
-
-<% @profileuser.pictures.each do |picture| %>
-<h4>Picture</h4>
-<%= picture.image_url %>
-<br>
-<%= image_tag picture.image.url(:medium) %>
-<br>
-<h4>Title</h4>
-<%= picture.title %>
-<h4>Comments</h4>
-<%  picture.comments.each do |comment| %>
-<%= comment.comment + " by " + comment.user.username%>
-<br>
-  <% end %>
-  <h4>Click on the tags below to see all pictures</h4>
-  <% picture.tags.each do |tag| %>
-  <%= link_to "#{tag.name}", tag_path(tag) %>
+  <h2 align="center"> <%= "#{@profileuser.username}'s Pictures" %> </h2>
+  <%= image_tag @profileuser.avatar.url(:medium), class:"img-circle" %>
   <br>
+
+  <% if current_user?@profileuser%>
+  <%= "flatgram" %>
+  <% elsif !relationship_exists?(current_user, @profileuser) %>
+      <%= form_for current_user, :url => relationships_path, method: :post do |f| %>
+      <%= f.hidden_field :followed_id, value: @profileuser.id %>
+      <%= f.submit "Follow", class:"btn btn-primary"  %>
+      <% end %>
+  <% elsif current_user.id == @profileuser.id %>
+    <%= "flatgram" %>
+  <%else %>
+      <%= form_for current_user, :url => relationship_path(current_user), method: :delete do |f| %>
+      <%= f.hidden_field :followed_id, value: @profileuser.id %>
+      <%= f.submit "Unfollow", class:"btn btn-primary"  %>
+      <% end %>
   <% end %>
-<li> <%= link_to "add comment", new_picture_comment_path(picture) %></li>
+</div>
+<div class="col-md-2">
+  <% if Tag.all != nil %>
+  <h3>Popular Tags:</h3>
+      <% Tag.most_popular.each do |tag| %>
+      <div><%= button_to tag.name, tag_path(tag), method: :get, class: "btn btn-success" %></div>
+      <% end %>
+  <% end %>
+</div>
+  <div class="col-md-6">
+    <h3>Trending</h3>
+    <div><%= button_to Tag.trending.name, tag_path(Tag.trending), method: :get, class: "btn btn-success" %></div>
+  </div>
+</div>
+
+<div class="container">
+<% @profileuser.pictures.each do |picture| %>
+<div class=<%="col-md-4"-%>>
+<h4>Picture</h4>
+<%= image_tag picture.image.url(:medium) %>
+<%= button_to "details", picture_path(picture), method: :get, class:"btn btn-primary" %>
+</div>
 <% end  %>
-<br>
-<br>
+</div>

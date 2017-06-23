@@ -1,6 +1,7 @@
 class SearchsController < ApplicationController
 
   def index
+    @search = params[:search]
     if params[:search]
       @tags = Tag.search(params[:search]).order("created_at DESC")
       params[:search] = nil

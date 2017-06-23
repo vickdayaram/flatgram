@@ -6,35 +6,8 @@
   <h3 align="center"> <%= picture.title %> </h3>
   <%= image_tag picture.image.url(:medium) %>
   <br>
-  <% if current_user?picture.user%>
-  <%= "Thanks for posting to Flatgram!" %>
-  <% elsif !relationship_exists?(current_user, picture.user) %>
-      <%= form_for current_user, :url => relationships_path, method: :post do |f| %>
-      <%= f.hidden_field :followed_id, value: picture.user.id %>
-      <%= f.submit "Follow" %>
-      <% end %>
-  <%else %>
-      <%= form_for current_user, :url => relationship_path(current_user), method: :delete do |f| %>
-      <%= f.hidden_field :followed_id, value: picture.user.id %>
-      <%= f.submit "Unfollow" %>
-      <% end %>
-  <% end %>
+  <%= button_to "details", picture_path(picture), method: :get, class:"btn btn-primary" %>
   <br>
-  <p><%= "By: "%></p>
-  <p><%= link_to "#{picture.user.username}", profile_path(picture.user.username) %></p>
-  <p><%= "Posted at ~ #{picture.created_at.strftime("%d %b. %Y %H:%M")}"%></p>
-  <p>Comments</p>
-  <% picture.comments.each do |comment| %>
-        <%= comment.comment + "- #{comment.user.username}"%>
-        <br>
-        <% end %>
-  <li> <%= link_to "Add Comment", new_picture_comment_path(picture) %></li>
-  <h4>Tags</h4>
-  <% picture.tags.each do |tag| %>
-        <%= link_to "#{tag.name}", tag_path(tag) %>
-        <% end %>
       </div>
   <% end %>
 </div>
-<br>
-<br>

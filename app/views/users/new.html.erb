@@ -1,7 +1,7 @@
 
-<h1>Welcome new user!</h1>
+<div align="center">
+<h1>Welcome To Flatgram!</h1>
 <h2>Sign up below</h2>
-
 <%= form_for @user do |f| %>
 <%= f.label :username %>
 <%= f.text_field :username %>
@@ -19,5 +19,9 @@
 <%= f.file_field :avatar %>
 <br>
 <br>
-<%= f.submit "Sign up!" %></a>
+<%= f.submit "Sign up!", class:"btn btn-primary" %></a>
 <% end %>
+<% if flash[:notice] %>
+<%= flash[:notice] %>
+<% end %>
+</div>

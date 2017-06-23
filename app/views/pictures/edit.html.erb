@@ -2,26 +2,18 @@
 <h1>Update your Picture</h1>
 
 <%= form_for @picture do |f| %>
-<%= f.label :image_url %>
-<%= f.text_field :image_url %>
-<br>
-<br>
 <%= f.label :title %>
 <%= f.text_field :title %>
 <br>
 <br>
-<%= f.label :image %>
-<%= f.file_field :image %>
-<br>
-<br>
 <%= f.fields_for :tags do |tag| %>
-  <label>Update Created Tags</label>
+  <label>Update Tags</label>
   <br>
   <br>
     <%= tag.label :name %>
     <%= tag.text_field :name %>
 <% end %>
-<br>
+<br> 
 <br>
 <label>Update tags: </label>
 <% Tag.all.each do |tag| %>

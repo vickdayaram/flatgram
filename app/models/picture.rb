@@ -8,13 +8,6 @@ class Picture < ApplicationRecord
   validates :title, presence: true
   validates :image, presence: true
 
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>", large: "400x400>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 end
-
-
-# <% Tag.all.each do |tag| %>
-# <br>
-# <%= check_box_tag "picture[tag_id][]", tag.id %>
-# <%= tag.name %>
-# <% end  %>
