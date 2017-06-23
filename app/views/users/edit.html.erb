@@ -1,0 +1,21 @@
+
+
+<div align="center">
+<h1>Update your profile details</h1>
+
+<%= form_for @user do |f| %>
+<%= f.label :username %>
+<%= f.text_field :username %>
+<br>
+<br>
+<%= f.label :email %>
+<%= f.text_field :email %>
+<br>
+<br>
+<%= f.label :avatar %>
+<%= f.file_field :avatar %>
+<br>
+<br>
+<%= f.submit "Update", class:"btn btn-primary" %></a>
+<% end %>
+</div>

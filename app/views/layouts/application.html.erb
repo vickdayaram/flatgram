@@ -2,13 +2,65 @@
 <html>
   <head>
     <title>Flatgram</title>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= analytics_init if Rails.env.production? %>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
   </head>
 
   <body>
-    <%= yield %>
+    <!--  navbar -->
+      <div class="navbar navbar-inverse bg-primary navbar-fixed-top"role="navigation">
+        <div class="container">
+
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+              <% if logged_in? %>
+              <div class="navbar-brand"> <%= link_to "Flatgram", user_path(current_user.id) %> </div>
+              <% else %>
+              <div class="navbar-brand"> <%= link_to "Flatgram", home_path %> </div>
+              <% end %>
+          </div>
+
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <% if logged_in? %>
+              <li class="navbar-brand"> <%= "Welcome Back #{current_user.username}!" %></li>
+              <li> <%= link_to "My Profile", user_path(current_user.id) %> </li>
+              <li> <%= link_to "Update your profile", edit_user_path(current_user)%> </li>
+              <li> <%= link_to 'Add a picture', new_picture_path %> </li>
+              <li> <%= link_to "Flatgram Feed", pictures_path %> </li>
+              <li> <%= link_to "Logout", logout_path, method: :post %></li>
+              <% else %>
+              <li> <%= link_to "Login", signin_path %> </li>
+              <li> <%= link_to "Sign Up", signup_path %> </li>
+              <% end %>
+
+              <ul class="nav navbar-nav font">
+                <%= form_tag(searchs_path, :method => "get", id: "search-form") do %>
+                <%= text_field_tag :search, params[:search], placeholder: "Search Flatgram" %>
+                <%= submit_tag "Search", :name => nil %>
+                <% end %>
+              </ul>
+             <!--  nav here -->
+            </ul>
+          </div><!--/.nav-collapse -->
+
+
+        </div>
+      </div>
+
+      <!-- content -->
+      <div class="container"  role="main">
+        <%= yield %>
+      </div>
+
+
   </body>
 </html>

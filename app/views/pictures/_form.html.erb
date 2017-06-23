@@ -1,0 +1,21 @@
+
+<%= form_for @picture do |f| %>
+<%= f.label :image_url %>
+<%= f.text_field :image_url %>
+<br>
+<br>
+<%= f.label :title %>
+<%= f.text_field :title %>
+<br>
+<br>
+<%= f.fields_for :tags do |tag| %>
+  <label>Create a Tag, or select one from the boxes below!</label>
+    <%= tag.label :name %>
+    <%= tag.text_field :name %>
+<% end %>
+<% Tag.all.each do |tag| %>
+<%= check_box_tag "picture[tag_id][]", tag.id %>
+<%= tag.name %>
+<% end  %>
+<%= f.submit %>
+<% end %>

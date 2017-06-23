@@ -1,0 +1,14 @@
+<h1><%= @tag.name %> pictures </h1>
+<br>
+<br>
+<div class="container">
+
+<% @tag.pictures.each do |picture| %>
+<div class=<%="col-md-4"-%>>
+<%= image_tag picture.image(:medium) %>
+<%= button_to "Details", picture_path(picture), method: :get, class:"btn btn-primary" %>
+<br>
+<br>
+</div>
+<% end %>
+</div>

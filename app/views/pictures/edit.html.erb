@@ -1,0 +1,26 @@
+
+<h1>Update your Picture</h1>
+
+<%= form_for @picture do |f| %>
+<%= f.label :title %>
+<%= f.text_field :title %>
+<br>
+<br>
+<%= f.fields_for :tags do |tag| %>
+  <label>Update Tags</label>
+  <br>
+  <br>
+    <%= tag.label :name %>
+    <%= tag.text_field :name %>
+<% end %>
+<br>
+<br>
+<label>Update tags: </label>
+<% Tag.all.each do |tag| %>
+<%= check_box_tag "picture[tag_id][]", tag.id %>
+<%= tag.name %>
+<% end  %>
+<br>
+<br>
+<%= f.submit "Update Picture" %>
+<% end %>
