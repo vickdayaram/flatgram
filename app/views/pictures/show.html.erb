@@ -9,7 +9,7 @@
 <p><%= "Posted at ~ #{@picture.created_at.strftime("%d %b. %Y %H:%M")}"%></p>
 <h4>Comments: </h4>
 <% @picture.comments.each do |comment| %>
-<%= comment.comment + " by " + comment.user.username%>
+<%= comment.user.username + ": " + comment.comment %>
 <br>
 <% end %>
 <% if current_user?@picture.user %>

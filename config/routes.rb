@@ -6,11 +6,10 @@ Rails.application.routes.draw do
   get '/flatgram', to: 'welcome#new', as: 'home'
   get '/signin', to: 'sessions#new', as: 'signin'
 
-  # resources :comments
+
+
   resources :picture_tags
   resources :tags
-  # resources :pictures
-  # resources :users Commenting out since we added the routes again at the bottom
   resources :sessions, only: [:new, :index, :create]
 
 

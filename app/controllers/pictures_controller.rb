@@ -1,5 +1,6 @@
 class PicturesController < ApplicationController
 
+  before_action :logged_in?
 
   def index
     @pictures = Picture.all.sort_by {|picture| picture.created_at}.reverse
@@ -53,6 +54,7 @@ class PicturesController < ApplicationController
 
   def destroy
     @picture = Picture.find(params[:id])
+    flash[:deleted] = @picture.title
     @picture.destroy
     redirect_to user_path(current_user.id)
   end

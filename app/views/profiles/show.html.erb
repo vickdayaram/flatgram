@@ -1,11 +1,12 @@
 <div class="container">
 <div class="col-md-4">
-  <h2 align="center"> <%= "#{@profileuser.username}'s Pictures" %> </h2>
+  <h1> <%= ":::#{@profileuser.username}:::" %> </h1>
+  <h3>Followers: <%= @profileuser.followers.count %> :: Following: <%= @profileuser.following.count %></h3>
   <%= image_tag @profileuser.avatar.url(:medium), class:"img-circle" %>
   <br>
 
   <% if current_user?@profileuser%>
-  <%= "flatgram" %>
+  <div></div>
   <% elsif !relationship_exists?(current_user, @profileuser) %>
       <%= form_for current_user, :url => relationships_path, method: :post do |f| %>
       <%= f.hidden_field :followed_id, value: @profileuser.id %>
@@ -37,9 +38,9 @@
 <div class="container">
 <% @profileuser.pictures.each do |picture| %>
 <div class=<%="col-md-4"-%>>
-<h4>Picture</h4>
+<h4>Pictures</h4>
 <%= image_tag picture.image.url(:medium) %>
-<%= button_to "details", picture_path(picture), method: :get, class:"btn btn-primary" %>
+<%= button_to "Details", picture_path(picture), method: :get, class:"btn btn-primary" %>
 </div>
 <% end  %>
 </div>
